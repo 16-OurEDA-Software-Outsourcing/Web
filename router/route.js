@@ -33,7 +33,7 @@ let transporter = nodemailer.createTransport({
     }
 });
 router.get('/admin',async(ctx,next)=>{
-     ctx.body = await renderer('后台管理系统.ect');
+     ctx.body = await renderer('index.ect');
      await next();
 });
 router.post('/action=signUpVerify', async (ctx, next) => {
