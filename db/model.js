@@ -1,6 +1,3 @@
-/**
- * Created by liuchaorun on 2017/3/29.
- */
 const fs = require('fs');
 const db = require('./database');
 

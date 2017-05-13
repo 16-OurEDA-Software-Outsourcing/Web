@@ -11,9 +11,12 @@
     "md5": "~2.2.1",
     "koa-session2":"~2.2.3",
     "ioredis": "~2.5.0",
-    "koa-socket": "~4.4.0",
     "koa.res.api":"~2.0.0",
-    "nodemailer": "~3.1.8"
+    "nodemailer": "~4.0.0",
+    "ect":"~0.5.9",
+    "superagent": "~3.5.2",
+    "cheerio": "~0.22.0",
+    "iconv-lite": "~0.4.17"
   },
   "devDependencies": {},
   "scripts": {

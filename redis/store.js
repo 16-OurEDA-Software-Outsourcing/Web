@@ -1,6 +1,3 @@
-/**
- * Created by liuchaorun on 2017/4/2.
- */
 const Redis = require("ioredis");
 const { Store } = require("koa-session2");
 

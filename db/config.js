@@ -1,6 +1,3 @@
-/**
- * Created by liuchaorun on 2017/3/29.
- */
 let config={
     database: 'postgres',
     username: 'postgres',
@@ -10,3 +7,5 @@ let config={
 };
 
 module.exports=config;
+
+
