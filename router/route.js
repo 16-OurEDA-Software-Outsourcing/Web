@@ -179,12 +179,14 @@ router.post('/action=freelist', async (ctx,next) => {
     ctx.api(freelist);
     await next();
 });
+
 router.post('/action=createlist', async (ctx,next) => {
 
     let createlist = await book.findAll();
     ctx.api(createlist);
     await next();
 });
+
 router.post('/action=listenlist', async (ctx,next) => {
 
     let listenlist = await book.findAll({
@@ -192,6 +194,74 @@ router.post('/action=listenlist', async (ctx,next) => {
     });
     ctx.api(listenlist);
     await next();
+});
+
+router.post('/action=getPersonHomePage',async (ctx,next) =>{
+
+    let custom_get_homepage_by_email = ctx.request.body.user_auth_id;
+    let getPersonHomePage = await user.findOne({
+        where:{email:custom_get_homepage_by_email}
+    });
+    ctx.api(getPersonHomePage);
+    await next();
+
+});
+
+
+router.post('/action=getPersonHomePage',async (ctx,next) =>{
+
+    let custom_get_homepage_by_email = ctx.request.body.email;
+    let getPersonHomePage = await user.findOne({
+        where:{email:custom_get_homepage_by_email}
+    });
+    let getPersonCommunicationSituation = await communication.findOne({
+        where:{}
+    })
+    ctx.api(getPersonHomePage);
+    await next();
+
+});
+
+router.post('/action=addConcern',async (ctx,next) =>{
+
+    let custom_user_a = ctx.request.body.user_a;
+    let custom_target_user_b = ctx.request.body.user_b;
+    let get_friendship = await communication.findAll({
+        where: {
+            $and: [
+                {user_a: custom_user_a},
+                {user_b: custom_target_user_b}
+            ]
+        }
+    });
+    if (get_friendship === null ){
+      let createdOne = communication.create({
+            user_a:custom_user_a,
+            user_b:custom_target_user_b,
+            friended:1
+        })
+        ctx.response.body = '关注成功';
+    }
+    else if (get_friendship.friended === 0) {
+        let updateOne = communication.update({
+
+            friended:1
+        })
+        ctx.response.body = '关注成功';
+    }
+    else if (get_friendship.friended === 1) {
+        let updateOne = communication.update({
+
+            friended: 0
+        })
+        ctx.response.body = '取消关注成功';
+    }
+    else {
+        ctx.response.body = '操作失败';
+    }
+
+    await next();
+
 });
 
 

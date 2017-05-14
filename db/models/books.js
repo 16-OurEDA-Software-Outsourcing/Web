@@ -8,10 +8,10 @@ module.exports = database.defineModel('books', {
         autoIncrement:true
     },
     book_name: {
-        type:Sequelize.STRING(40)
+        type:Sequelize.STRING(200)
     },
     writer:{
-        type:Sequelize.STRING(20)
+        type:Sequelize.STRING(60)
     },
     size:{
         type:Sequelize.DOUBLE
@@ -20,13 +20,13 @@ module.exports = database.defineModel('books', {
         type:Sequelize.INTEGER
     },
     intro:{
-        type:Sequelize.STRING(200)
+        type:Sequelize.STRING(2000)
     },
 
-    type:Sequelize.STRING(10),
+    type:Sequelize.STRING(100),
 
     title_picture:{
-        type:Sequelize.STRING(100)
+        type:Sequelize.STRING(200)
     },
     price:Sequelize.DOUBLE
 

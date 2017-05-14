@@ -11,7 +11,7 @@ module.exports = database.defineModel('chapters', {
     },
 
     address:{
-        type:Sequelize.STRING(100)
+        type:Sequelize.STRING(400)
     }
 
 
