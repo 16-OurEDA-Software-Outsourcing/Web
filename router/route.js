@@ -36,6 +36,14 @@ router.get('/admin',async(ctx,next)=>{
      ctx.body = await renderer('index.ect');
      await next();
 });
+router.get('/admin/books',async(ctx,next)=>{
+    ctx.body = await renderer('books.ect');
+    await next();
+});
+router.get('/admin/users',async(ctx,next)=>{
+    ctx.body = await renderer('users.ect');
+    await next();
+});
 router.post('/action=signUpVerify', async (ctx, next) => {
     ctx.custom_Email = ctx.request.body.email;
     let n = Math.floor(Math.random() * 9000 + 1000);
@@ -216,7 +224,7 @@ router.post('/action=getPersonHomePage',async (ctx,next) =>{
     });
     let getPersonCommunicationSituation = await communication.findOne({
         where:{}
-    })
+    });
     ctx.api(getPersonHomePage);
     await next();
 
@@ -239,21 +247,21 @@ router.post('/action=addConcern',async (ctx,next) =>{
             user_a:custom_user_a,
             user_b:custom_target_user_b,
             friended:1
-        })
+        });
         ctx.response.body = '关注成功';
     }
     else if (get_friendship.friended === 0) {
         let updateOne = communication.update({
 
             friended:1
-        })
+        });
         ctx.response.body = '关注成功';
     }
     else if (get_friendship.friended === 1) {
         let updateOne = communication.update({
 
             friended: 0
-        })
+        });
         ctx.response.body = '取消关注成功';
     }
     else {
