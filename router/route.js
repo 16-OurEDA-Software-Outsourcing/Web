@@ -33,15 +33,42 @@ let transporter = nodemailer.createTransport({
     }
 });
 router.get('/admin',async(ctx,next)=>{
-     ctx.body = await renderer('index.ect');
+     ctx.body = await renderer('login.ect');
      await next();
 });
+router.post('/admin/index',async(ctx,next)=>{
+    if(ctx.request.body.u=='admin'&&ctx.request.body.p=='pobooks5')
+        ctx.body=await renderer('index.ect');
+    else ctx.body='密码错误或该用户不存在！'
+});
 router.get('/admin/books',async(ctx,next)=>{
-    ctx.body = await renderer('books.ect');
+    let bookall = await book.findAll();
+    let booka = new Array();
+    for(let i=0;i<bookall.length;++i){
+        booka[i]={};
+        booka[i].name = bookall[i].book_name;
+        booka[i].writer = bookall[i].writer;
+        booka[i].num = bookall[i].chapter_num;
+        booka[i].createdate = bookall[i].created_at;
+        booka[i].update = bookall[i].updated_at;
+        booka[i].price = bookall[i].price;
+    }
+    let data={booksall:booka};
+    ctx.body = await renderer('books.ect',data);
     await next();
 });
 router.get('/admin/users',async(ctx,next)=>{
-    ctx.body = await renderer('users.ect');
+    let userall = await user_auth.findAll();
+    let usera = new Array();
+    for(let i=0;i<userall.length;++i){
+        usera[i]={};
+        usera[i].email=userall[i].email;
+        usera[i].phonenumber=userall[i].phone;
+        usera[i].createdate=userall[i].created_at;
+        usera[i].update=userall[i].updated_at;
+    }
+    let data={userall:usera};
+    ctx.body = await renderer('users.ect',data);
     await next();
 });
 router.post('/action=signUpVerify', async (ctx, next) => {
@@ -77,7 +104,7 @@ router.post('/action=signup', async (ctx, next) => {
             email: ctx.custom_email,
             user_id: ctx.custom_email,
             password: ctx.custom_password
-        }).catch(function (err){ 
+        }).catch(function (err){
             console.log(err);
         });
         let user = await a.createUser({nickname:'visitor'}).catch(function (err){
