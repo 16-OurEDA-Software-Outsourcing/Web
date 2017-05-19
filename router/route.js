@@ -8,7 +8,7 @@ const renderer = require('../admin/view');
 const multer = require('koa-multer');
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '/home/lcr/');    // 保存的路径，备注：需要自己创建
+        cb(null, '/home/ubuntu/file/');    // 保存的路径，备注：需要自己创建
     },
     filename: function (req, file, cb) {
         // 将保存文件名设置为 字段名 + 时间戳，比如 logo-1478521468943
