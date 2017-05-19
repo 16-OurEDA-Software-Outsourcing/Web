@@ -16,7 +16,8 @@
     "ect":"~0.5.9",
     "superagent": "~3.5.2",
     "cheerio": "~0.22.0",
-    "iconv-lite": "~0.4.17"
+    "iconv-lite": "~0.4.17",
+    "koa-multer": "~1.0.1"
   },
   "devDependencies": {},
   "scripts": {

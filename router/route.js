@@ -5,6 +5,18 @@ const nodemailer = require('nodemailer');
 const config = require('../db/config');
 const Sequelize = require('sequelize');
 const renderer = require('../admin/view');
+const multer = require('koa-multer');
+let storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '/home/lcr/');    // 保存的路径，备注：需要自己创建
+    },
+    filename: function (req, file, cb) {
+        // 将保存文件名设置为 字段名 + 时间戳，比如 logo-1478521468943
+        cb(null, req.name+'.txt');
+    }
+});
+const upload = multer({ storage: storage });
+
 let sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
     dialect: 'postgres',
@@ -32,12 +44,40 @@ let transporter = nodemailer.createTransport({
         pass: 'pobooks126'
     }
 });
+router.post('/admin/upload',upload.single('file'),async(ctx,next)=>{
+    console.log(ctx.req.file.size);
+    console.log(ctx.req.body.name);
+    book.create({
+        book_name:ctx.req.body.name,
+        writer:ctx.req.body.writer,
+        size:ctx.req.file.size,
+        chapter_num:parseInt(ctx.req.body.num),
+        type:1,
+        intro:ctx.req.body.name,
+        price:parseInt(ctx.req.body.price),
+        title_picture:'http:123.206.71.182:8000/'
+    });
+    let bookall = await book.findAll();
+    let booka = new Array();
+    for(let i=0;i<bookall.length;++i){
+        booka[i]={};
+        booka[i].name = bookall[i].book_name;
+        booka[i].writer = bookall[i].writer;
+        booka[i].num = bookall[i].chapter_num;
+        booka[i].createdate = bookall[i].created_at;
+        booka[i].update = bookall[i].updated_at;
+        booka[i].price = bookall[i].price;
+    }
+    let data={booksall:booka};
+    ctx.body = await renderer('books.ect',data);
+    await next();
+});
 router.get('/admin',async(ctx,next)=>{
      ctx.body = await renderer('login.ect');
      await next();
 });
 router.post('/admin/index',async(ctx,next)=>{
-    if(ctx.request.body.u=='admin'&&ctx.request.body.p=='pobooks5')
+    if(ctx.request.body.u==='admin'&&ctx.request.body.p==='pobooks5')
         ctx.body=await renderer('index.ect');
     else ctx.body='密码错误或该用户不存在！'
 });

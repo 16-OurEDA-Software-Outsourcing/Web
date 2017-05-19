@@ -26,7 +26,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
@@ -180,6 +179,30 @@
                 <div class="row">
                     <div class="col-lg-6" style="width: 100% !important;height: 100% !important;">
                         <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>书名</th>
+                                        <th>作者</th>
+                                        <th>章节数</th>
+                                        <th>价格</th>
+                                        <th>文件</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <form action="http://127.0.0.1:3000/admin/upload" enctype="multipart/form-data" method="post">
+                                            <th><input type="txt" name="name" multiple></th>
+                                            <th><input type="txt" name="writer" multiple></th>
+                                            <th><input type="txt" name="num" multiple></th>
+                                            <th><input type="txt" name="price" multiple></th>
+                                            <th><input type="file" name="file" multiple></th>
+                                            <th><input type="submit" value="提交"><th>
+                                        </form>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
