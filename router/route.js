@@ -240,7 +240,7 @@ router.post('/action=readbook', async (ctx,next) => {
 router.post('/action=newlist', async (ctx,next) => {
 
     let newlist = await book.findAll({
-        order:['book_id','DESC']
+        order:'book_id DESC'
     });
     ctx.api(newlist);
      await next();

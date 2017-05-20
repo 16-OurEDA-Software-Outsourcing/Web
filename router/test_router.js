@@ -30,7 +30,7 @@ chapter.belongsTo(book);
 
 async function createTest() {
 
-    let test = await book.create(
+    let test1 = await book.create(
         {
             book_name:'斗破苍穹',
             writer:'天蚕土豆',
@@ -41,7 +41,7 @@ async function createTest() {
             title_picture: 'http://123.206.71.182:8000/bookimage/斗破苍穹.jpg',
             price: 0.00
         });
-    let test1 = await book.create(
+    let test2 = await book.create(
         {
             book_name:'唐砖',
             writer:'孑与2',
@@ -52,7 +52,7 @@ async function createTest() {
             title_picture: 'http://123.206.71.182:8000/bookimage/唐砖.jpg',
             price: 0.00
         });
-    let test2 = await book.create(
+    let test3 = await book.create(
         {
             book_name:'最牛古董商',
             writer:'老三家老三',
@@ -63,7 +63,7 @@ async function createTest() {
             title_picture: 'http://123.206.71.182:8000/bookimage/最牛古董商.jpg',
             price: 0.00
         });
-    let test3 = await book.create(
+    let test4 = await book.create(
         {
             book_name:'英雄联盟之从小兵开始',
             writer:'天蚕土豆',
@@ -74,15 +74,15 @@ async function createTest() {
             title_picture: 'http://123.206.71.182:8000/bookimage/英雄联盟之从小兵开始.jpg',
             price: 0.00
         });
-    let test4 = await book.create(
+    let test5 = await book.create(
         {
-            book_name:'英雄联盟之从小兵开始',
-            writer:'天蚕土豆',
-            size: 123123132,
-            chapter_num: 598,
-            intro: '',
+            book_name:'首富巨星',
+            writer:'京门菜刀',
+            size: 1231,
+            chapter_num: 64,
+            intro: '一觉醒来，张启阳发现自己正在《我是歌手》的踢馆赛现场。他居然成了这个位面的华国首富之子！他的前身，离经叛道，酷爱摇滚。',
             type: '1',
-            title_picture: 'http://123.206.71.182:8000/bookimage/英雄联盟之从小兵开始.jpg',
+            title_picture: 'http://123.206.71.182:8000/bookimage/首富巨星.jpg',
             price: 0.00
         });
 }
