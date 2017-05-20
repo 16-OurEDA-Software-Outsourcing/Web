@@ -52,10 +52,10 @@ router.post('/admin/upload',upload.single('file'),async(ctx,next)=>{
         writer:ctx.req.body.writer,
         size:ctx.req.file.size,
         chapter_num:parseInt(ctx.req.body.num),
-        type:1,
+        type:'1',
         intro:ctx.req.body.name,
         price:parseInt(ctx.req.body.price),
-        title_picture:'http:123.206.71.182:8000/'
+        title_picture:'http:123.206.71.182:8000/'+ctx.req.body.name
     });
     let bookall = await book.findAll();
     let booka = new Array();
